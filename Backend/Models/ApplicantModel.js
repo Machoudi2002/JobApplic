@@ -13,6 +13,7 @@ export const AppSchema = new Schema({
     },
     linkedinURL : {
         type: String,
+        required: true
     },
     phoneNumber: {
         type: String,
