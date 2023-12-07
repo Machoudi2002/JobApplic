@@ -11,12 +11,17 @@ export const AppSchema = new Schema({
         type: String,
         required: true
     },
+    phoneNumber: {
+        type: String,
+        required: true,
+    },
     linkedinURL : {
         type: String,
         required: true
     },
-    phoneNumber: {
+    portfolioURL : {
         type: String,
+        default: ""
     },
     experience: {
         type: Number,

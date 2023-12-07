@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom"
 
 const LinkList = [
-    {name: "Home", path: "/"},
-    {name: "Jobs", path: "/Jobs"}
+    {name: "Jobs", path: "/"},
+    {name: "Admin", path: "/Admin"}
 ]
 
 const NavBar = () => {

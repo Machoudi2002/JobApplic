@@ -8,7 +8,8 @@ export default {
     colors: {
       "backColor": "#FFF78A",
       "textColor": "#191919",
-      "whiteBack": "#FFFBF5"
+      "whiteBack": "#FFFBF5",
+      "gray": "#9ca3af"
     },
     fontFamily: {
       "mainFont": ["Lato"]

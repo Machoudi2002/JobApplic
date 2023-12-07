@@ -1,17 +1,14 @@
-type jobInformation = {
-    jobTitle: String,
-    jobDescription: String
-}
+import { jobInfo } from "../types"
 
-const JobInfo = ( props : jobInformation ) => {
+const JobInfo = ( props : jobInfo ) => {
   return (
     <>
-        <section className="container text-center pt-20 pb-10">
+        <section className="container">
           <h1 className="font-extrabold italic text-5xl">
-            {props.jobTitle}
+            {props.title}
           </h1>
           <p className="font-mainFont italic my-3">
-            {props.jobDescription}
+            {props.description}
           </p>
         </section>
     </>
