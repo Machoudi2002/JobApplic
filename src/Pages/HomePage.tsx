@@ -3,8 +3,8 @@ import { JobCard } from "../Components/JobCard"
 import useFetchApi from "../hooks/useFetchApi";
 import { JobObject } from "../types";
 
-const HomePage = () => {
-  const API_URL = 'http://localhost:4000/jobs';
+const HomePage = () => { 
+  const API_URL = `${import.meta.env.VITE_WEBSITE_DOMAIN}/jobs`;
   const { apiData, getJobs } = useFetchApi()
 
   useEffect(() => {

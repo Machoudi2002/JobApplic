@@ -9,7 +9,7 @@ const JobInfo = ( props : jobInfo ) => {
           </h1>
           <p className="font-mainFont italic my-3">
             {props.description}
-          </p>
+          </p>          
         </section>
     </>
   )

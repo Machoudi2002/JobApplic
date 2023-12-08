@@ -7,7 +7,7 @@ import {useEffect } from "react"
 const JobPage = () => {
   let { jobId } = useParams();
   const { apiData, getJobById } = useFetchApi();
-  const API_URL = `http://localhost:4000/jobs/${jobId}`
+  const API_URL = `${import.meta.env.VITE_WEBSITE_DOMAIN}/jobs/${jobId}`
 
   useEffect(() => {
     getJobById(API_URL)
@@ -21,6 +21,7 @@ const JobPage = () => {
         <JobInfo
           title={apiData.title}
           description={apiData.description}
+          date={apiData.date}
         />
         <JobForm API_PUT_URL={API_URL}/>
       </section>

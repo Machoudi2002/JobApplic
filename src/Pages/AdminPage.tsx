@@ -5,7 +5,7 @@ import useFetchApi from '../hooks/useFetchApi';
 const AdminPage: React.FC = () => {
   const { register, handleSubmit } = useForm();
   const { postNewJob } = useFetchApi();
-  let API_POST_URL= "http://localhost:4000/jobs"
+  let API_POST_URL= `${import.meta.env.VITE_WEBSITE_DOMAIN}/jobs`
 
   const onSubmit = (data: any) => {
     postNewJob(API_POST_URL, data)

@@ -1,22 +1,22 @@
 export type jobInfo = {
     id?: object;
-    title: String;
-    description: String;
-    date: String;
+    title: string;
+    description: string;
+    date?: string;
 }
 
 export type jobApp = {
-    fullname: String;
-    email: String;
-    phoneNumber: String;
-    linkedinURL: String;
-    portfolioURL?: String;
+    fullname: string;
+    email: string;
+    phoneNumber: string;
+    linkedinURL: string;
+    portfolioURL?: string;
     experience: number;
 }
 
 export type JobObject = {
     _id: object;
-    title: String;
-    description: String;
-    date: String;
+    title: string;
+    description: string;
+    date: string;
 }

@@ -6,8 +6,8 @@ import { appRouter } from './Routes/Routes';
 
 const PORT = 4000
 const corsOptions = {
-    origin: 'http://localhost:5173',  // Replace with your React app's origin
-    methods: '*',                      // Allow all methods
+    origin: 'http://localhost:5173',
+    methods: '*',                      
   };
 const app = express();
 
