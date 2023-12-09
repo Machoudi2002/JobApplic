@@ -1,4 +1,5 @@
 import express from 'express';
+import compression from 'compression';
 import cors from 'cors';
 import connectDB from './db';
 import { appRouter } from './Routes/Routes';
@@ -10,12 +11,13 @@ const corsOptions = {
     methods: '*',                      
   };
 const app = express();
-
 connectDB();
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors(corsOptions));
+app.use(compression())
+
 
 
 app.get("/", (req, res) => {
