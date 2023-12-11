@@ -20,3 +20,8 @@ export type JobObject = {
     description: string;
     date: string;
 }
+
+export type LoginData = {
+    email: string;
+    password: string;
+}

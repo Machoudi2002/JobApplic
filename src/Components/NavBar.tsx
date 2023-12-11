@@ -1,22 +1,31 @@
 import { Link } from "react-router-dom"
-
-const LinkList = [
-    {name: "Jobs", path: "/"},
-    {name: "Admin", path: "/Admin"}
-]
+import useAuth from "../hooks/useAuth"
 
 const NavBar = () => {
+    const { isAuth, logout } = useAuth();
   return (
     <>
         <nav className="container py-5 font-extrabold flex align-center justify-center">
             <ul className="flex flex-row gap-5">
+                <li>
+                    <Link to="/">Jobs</Link>
+                </li>
                 {
-                    LinkList.map((link, i) => (
-                        <li key={i} >
-                            <Link to={link.path}>{link.name}</Link>
+                    isAuth ? (
+                        <li>
+                            <Link to="/Admin">Admin</Link>
                         </li>
-                    ))
+                    ) : (
+                        <li>
+                            <Link to="/Login">Login</Link>
+                        </li>
+                    )
+                }
 
+                {
+                    isAuth ? (
+                        <button onClick={logout}>Logout</button>
+                    ) : null
                 }    
             </ul>
         </nav>

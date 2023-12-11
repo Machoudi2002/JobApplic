@@ -1,5 +1,6 @@
 
 import { useForm, SubmitHandler } from "react-hook-form";
+import { useEffect } from "react";
 import { jobApp } from "../types";
 import useFetchApi from "../hooks/useFetchApi";
 
@@ -14,12 +15,22 @@ const JobForm: React.FC<Props> = ({ API_PUT_URL }) => {
   const {
     register,
     handleSubmit,
+    reset,
+    formState,
     formState: { errors },
   } = useForm<FormInput>();
 
   const onSubmit: SubmitHandler<FormInput> = (data) => {
     postNewJob(API_PUT_URL, data);
+    reset({...data})
   };
+
+  useEffect(() => {
+    if (formState.isSubmitSuccessful) {
+      reset()
+    }
+    
+  }, [reset, formState])
 
   return (
     <section>

@@ -1,15 +1,27 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import useFetchApi from '../hooks/useFetchApi';
 
 const AdminPage: React.FC = () => {
-  const { register, handleSubmit } = useForm();
+  const { 
+    register, 
+    handleSubmit, 
+    reset,
+    formState } = useForm();
   const { postNewJob } = useFetchApi();
   let API_POST_URL= `${import.meta.env.VITE_WEBSITE_DOMAIN}/jobs`
 
   const onSubmit = (data: any) => {
     postNewJob(API_POST_URL, data)
   };
+
+  useEffect(() => {
+    if (formState.isSubmitSuccessful) {
+      reset()
+    }
+    
+  }, [reset, formState])
+
 
   return (
     <div>
