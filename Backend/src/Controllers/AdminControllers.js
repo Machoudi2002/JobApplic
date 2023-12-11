@@ -28,7 +28,7 @@ export const LoginAdmin = async (req, res) => {
         if (!passwordMatch) {
             return res.status(401).json({ error: 'Invalid username or password' });
         }
-        const token = jwt.sign({ userId: admin._id }, 'secret_key');
+        const token = jwt.sign({ AdminId: admin._id }, 'secret_key');
         res.json({ token });
     } catch (err) {
         console.error('Login error:', err.message);
