@@ -16,7 +16,10 @@ interface AuthProviderProps {
 export const AuthContext = createContext<AuthContextProps | undefined>(undefined);
 
 export const AuthProvider : React.FC<AuthProviderProps> = ({ children }) => {
-    const [isAuth, setIsAuth] = useState(false)
+    const [isAuth, setIsAuth] = useState(() => {
+        // Initialize isAuth based on the stored value in localStorage
+        return localStorage.getItem("isAuth") === "true";
+      });
     let navigate = useNavigate()
 
     const login = async (Data : LoginData) => {
@@ -24,6 +27,7 @@ export const AuthProvider : React.FC<AuthProviderProps> = ({ children }) => {
         try {
             await axios.post(API_URL, Data);
             setIsAuth(true)
+            localStorage.setItem("isAuth", "true");
             navigate("/Admin")
 
         } catch (error) {
@@ -38,6 +42,7 @@ export const AuthProvider : React.FC<AuthProviderProps> = ({ children }) => {
     
     const logout = () => {
         setIsAuth(false);
+        localStorage.removeItem("isAuth");
       };
 
     return (
