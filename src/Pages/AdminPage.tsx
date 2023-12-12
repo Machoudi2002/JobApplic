@@ -15,15 +15,15 @@ const AdminPage: React.FC = () => {
 
   const onSubmit = (data: any) => {
     postNewJob(API_POST_URL, data)
-    submitSuccess(
-      "New job has been Added successfully",
-      true
-    )
   };
 
   useEffect(() => {
     if (formState.isSubmitSuccessful) {
       reset();
+      submitSuccess(
+        "New job has been Added successfully",
+        true
+      )
     }
     
   }, [reset, formState])
