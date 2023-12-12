@@ -12,7 +12,7 @@ interface Props {
 }
 
 const JobForm: React.FC<Props> = ({ API_PUT_URL }) => {
-  const { postNewJob } = useFetchApi();
+  const { postJobApp } = useFetchApi();
   const { submitSuccess, submitMessage, submitStatus } = useSubmitMessage();
   const {
     register,
@@ -23,17 +23,16 @@ const JobForm: React.FC<Props> = ({ API_PUT_URL }) => {
   } = useForm<FormInput>();
 
   const onSubmit: SubmitHandler<FormInput> = (data) => {
-    postNewJob(API_PUT_URL, data);
-    submitSuccess(
-      "You're Application has been successfully registered",
-      true
-    )
-    reset({...data})
+    postJobApp(API_PUT_URL, data);
   };
 
   useEffect(() => {
     if (formState.isSubmitSuccessful) {
       reset();
+      submitSuccess(
+        "You're Application has been successfully registered",
+        true
+      )
     }
     
   }, [reset, formState])
