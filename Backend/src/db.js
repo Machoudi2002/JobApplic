@@ -1,11 +1,12 @@
 // db.js
 import mongoose from 'mongoose';
+require("dotenv").config()
 
 mongoose.Promise = global.Promise;
 
 const connectDB = async () => {
     try {
-        await mongoose.connect("mongodb://127.0.0.1:27017/JobApp", {
+        await mongoose.connect(process.env.MongoDB_URI, {
             useNewUrlParser: true,
             useUnifiedTopology: true,
         });
