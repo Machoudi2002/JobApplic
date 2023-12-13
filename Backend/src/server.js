@@ -7,7 +7,7 @@ import { appRouter } from './Routes/Routes';
 
 const PORT = 4000
 const corsOptions = {
-    origin: ['https://jobapplic.netlify.app', 'http://localhost:5174/'],
+    origin: ['https://jobapplic.netlify.app', 'http://localhost:5174'],
     methods: '*',                      
   };
 const app = express();

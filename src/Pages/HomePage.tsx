@@ -9,7 +9,7 @@ const HomePage = () => {
 
   useEffect(() => {
     getJobs(API_URL);
-  }, [])
+  }, [apiData])
 
   
   return (
