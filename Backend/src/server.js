@@ -37,5 +37,5 @@ app.get("/", (req, res) => {
 appRouter(app);
 
 app.listen(PORT, () => {
-    console.log(`URl: http://localhost:${PORT}`);
+    console.log(`the site running on PORT:${PORT}`);
 });
