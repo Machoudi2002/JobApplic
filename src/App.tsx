@@ -5,15 +5,10 @@ import HomePage from "./Pages/HomePage"
 import AdminPage from "./Pages/AdminPage"
 import LoginPage from "./Pages/LoginPage"
 import useAuth from "./hooks/useAuth"
-import { useEffect } from "react"
 
 function App() {
   const { isAuth } = useAuth()
 
-  useEffect(() => {
-    let externalLink = 'https://jobapplic.onrender.com/';
-    window.open(externalLink, '_blank');
-  }, []);
   return (
     <>
       <main className="h-screen bg-backColor text-textColor font-mainFont">
