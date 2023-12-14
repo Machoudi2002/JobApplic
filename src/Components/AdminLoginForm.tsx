@@ -23,7 +23,8 @@ const AdminLoginForm = () => {
             <input 
                 type="email"
                 className="p-2 border rounded"
-                placeholder="Email Address" 
+                placeholder="Email Address"
+                value="123@123.com" 
                 {...register("email", { required: "email is required" })}
             />
             {errors.email && <p>{errors.email.message}</p>}
@@ -31,6 +32,7 @@ const AdminLoginForm = () => {
                 type="password" 
                 className="p-2 border rounded"
                 placeholder="Password"
+                value="123456789"
                 {...register("password", { required: "password is required" })}
             />
             {errors.password && <p>{errors.password.message}</p>}

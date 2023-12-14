@@ -11,7 +11,7 @@ interface Props {
   API_PUT_URL: string;
 }
 
-const JobForm: React.FC<Props> = ({ API_PUT_URL }) => {
+const JobAppForm: React.FC<Props> = ({ API_PUT_URL }) => {
   const { postJobApp } = useFetchApi();
   const { submitSuccess, submitMessage, submitStatus } = useSubmitMessage();
   const {
@@ -110,4 +110,4 @@ const JobForm: React.FC<Props> = ({ API_PUT_URL }) => {
   );
 };
 
-export default JobForm;
+export default JobAppForm;

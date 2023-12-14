@@ -1,8 +1,8 @@
 import JobInfo from '../Components/JobInfo';
-import JobForm from '../Components/JobForm';
+import JobAppForm from '../Components/JobAppForm';
 import { useParams } from 'react-router-dom';
 import useFetchApi from '../hooks/useFetchApi';
-import {useEffect } from "react"
+import { useEffect } from "react"
 
 const JobPage = () => {
   let { jobId } = useParams();
@@ -23,7 +23,7 @@ const JobPage = () => {
           description={apiData.description}
           date={apiData.date}
         />
-        <JobForm API_PUT_URL={API_URL}/>
+        <JobAppForm API_PUT_URL={API_URL}/>
       </section>
     </>
   );
