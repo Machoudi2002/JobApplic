@@ -10,7 +10,7 @@ const AdminPage = () => {
 
   useEffect(() => {
     getJobs(API_URL);
-  }, [apiData])
+  }, [])
   return (
     <section className="container text-center py-20">
       <h1 className="font-extrabold italic text-5xl mb-10">Admin Page</h1>

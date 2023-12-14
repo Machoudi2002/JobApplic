@@ -12,6 +12,7 @@ const EditJobPage: React.FC = () => {
   let API_POST_URL = `${import.meta.env.VITE_WEBSITE_DOMAIN}/jobs`;
 
   const onSubmit = (data: object) => {
+    console.log("submit")
     editJobDetails(API_POST_URL, data)
     .then(() => submitSuccess(
       "job details updated successfully",
@@ -26,7 +27,7 @@ const EditJobPage: React.FC = () => {
 
   return (
     <div>
-      <h1 className='text-center font-extrabold italic text-5xl mt-16'>Post New Job</h1>
+      <h1 className='text-center font-extrabold italic text-5xl mt-16'>Edit Job Details</h1>
       {submitStatus && (
         <h1 className='text-center font-extrabold italic text-5xl mt-16'>
           {submitMessage}
