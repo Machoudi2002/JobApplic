@@ -1,66 +1,38 @@
-import React, { useEffect } from 'react';
-import { useForm } from 'react-hook-form';
+// EditJobPage.tsx
+import React from 'react';
 import useFetchApi from '../hooks/useFetchApi';
 import useSubmitMessage from '../hooks/useSubmitMessage';
+import JobForm from '../Components/JobForm';
 
-const AddNewJob: React.FC = () => {
-  const { 
-    register, 
-    handleSubmit, 
-    reset,
-    formState } = useForm();
+const EditJobPage: React.FC = () => {
   const { postNewJob } = useFetchApi();
-  const { submitStatus, submitMessage, submitSuccess} = useSubmitMessage()
-  let API_POST_URL= `${import.meta.env.VITE_WEBSITE_DOMAIN}/jobs`
+  const { submitStatus, submitSuccess, submitMessage } = useSubmitMessage();
+  let API_POST_URL = `${import.meta.env.VITE_WEBSITE_DOMAIN}/jobs`;
 
-  const onSubmit = (data: any) => {
+  const onSubmit = (data: object) => {
     postNewJob(API_POST_URL, data)
+    .then(() => submitSuccess(
+      "New Job has been Added successfully",
+      true
+    ))
+    .catch((error) => console.error(error));
+
   };
-
-  useEffect(() => {
-    if (formState.isSubmitSuccessful) {
-      reset();
-      submitSuccess(
-        "New job has been Added successfully",
-        true
-      )
-    }
-    
-  }, [reset, formState])
-
 
   return (
     <div>
       <h1 className='text-center font-extrabold italic text-5xl mt-16'>Post New Job</h1>
-      {
-        submitStatus ? <h1 className='text-center font-extrabold italic text-5xl mt-16'>{submitMessage}</h1> :
-        (
-          <form
-          className="container px-8 py-5 mt-10 bg-whiteBack shadow rounded font-mainFont flex flex-col gap-3"
-          onSubmit={handleSubmit(onSubmit)}
-          >
-            <input
-              className="p-2 border rounded"
-              type="text"
-              placeholder="Job Title"
-              {...register('title', { required: true })}
-            />
-            <textarea
-              className="p-2 border rounded"
-              placeholder="Job Description"
-              cols={30}
-              rows={10}
-              {...register('description', { required: true })}
-            ></textarea>
-            <input 
-                className="p-3 border rounded shadow bg-textColor text-whiteBack cursor-pointer"
-                type="submit" 
-                value="Post New Job" />
-          </form>
-        )
-      }
+      {submitStatus && (
+        <h1 className='text-center font-extrabold italic text-5xl mt-16'>
+          {submitMessage}
+        </h1>
+      )}
+      <JobForm onSubmit={onSubmit} defaultValues={{
+        title: "",
+        description: "",
+      }} />
     </div>
   );
 };
 
-export default AddNewJob;
+export default EditJobPage;
