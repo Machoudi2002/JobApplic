@@ -8,11 +8,15 @@ import JobForm from '../Components/JobForm';
 const EditJobPage: React.FC = () => {
   const { jobId } = useParams();
   const { editJobDetails, getJobById, apiData } = useFetchApi();
-  const { submitStatus, submitMessage } = useSubmitMessage();
+  const { submitStatus, submitMessage, submitSuccess} = useSubmitMessage();
   let API_POST_URL = `${import.meta.env.VITE_WEBSITE_DOMAIN}/jobs`;
 
   const onSubmit = (data: object) => {
     editJobDetails(`${API_POST_URL}/${jobId}`, data);
+    submitSuccess(
+      "Job details updated successfully",
+      true
+    )
   };
 
   useEffect(() => {
