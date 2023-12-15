@@ -85,7 +85,7 @@ const JobAppForm: React.FC<Props> = ({ API_PUT_URL }) => {
             placeholder="Linkedin Profile URL"
             {...register("linkedinURL", { 
               required: "LinkedIn URL is required",
-              validate: (str) => !str.startsWith("https://www.linkedin.com/") ? "This is not a linkedin profile" : true
+              validate: (str) => !str.startsWith("https://www.linkedin.com/in/") ? "This is not a linkedin profile" : true
             })}
           />
           {errors.linkedinURL && <p>{errors.linkedinURL.message}</p>}
