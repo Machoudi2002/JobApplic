@@ -1,4 +1,4 @@
-import { addNewJob, CreateNewJobApp, getJobById, getJobs } from "../Controllers/JobsControllers"
+import { addNewJob, CreateNewJobApp, editJobDetails, getJobById, getJobs, deleteJobById } from "../Controllers/JobsControllers"
 import { RegisterAdmin, LoginAdmin } from "../Controllers/AdminControllers"
 
 export const appRouter = (app) => {
@@ -15,4 +15,6 @@ export const appRouter = (app) => {
     app.route("/jobs/:id")
     .get(getJobById)
     .put(CreateNewJobApp)
+    .patch(editJobDetails)
+    .delete(deleteJobById)
 }

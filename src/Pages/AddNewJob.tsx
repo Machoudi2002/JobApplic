@@ -22,15 +22,17 @@ const EditJobPage: React.FC = () => {
   return (
     <div>
       <h1 className='text-center font-extrabold italic text-5xl mt-16'>Post New Job</h1>
-      {submitStatus && (
-        <h1 className='text-center font-extrabold italic text-5xl mt-16'>
-          {submitMessage}
-        </h1>
-      )}
-      <JobForm onSubmit={onSubmit} defaultValues={{
-        title: "",
-        description: "",
-      }} />
+      {submitStatus 
+        ? (
+          <h1 className='text-center font-extrabold italic text-5xl mt-16'>
+            {submitMessage}
+          </h1>
+        ) :
+        <JobForm onSubmit={onSubmit} defaultValues={{
+          title: "",
+          description: "",
+        }} />
+      }
     </div>
   );
 };

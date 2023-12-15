@@ -10,7 +10,7 @@ const AdminPage = () => {
 
   useEffect(() => {
     getJobs(API_URL);
-  }, [])
+  }, [apiData])
   return (
     <section className="container text-center py-20">
       <h1 className="font-extrabold italic text-5xl mb-10">Admin Page</h1>
@@ -32,7 +32,7 @@ const AdminPage = () => {
                 >
                   Edit
                 </button>
-                <button onClick={() => deleteJob(API_URL + `/${job._id}`)}>Remove</button>
+                <button onClick={() => deleteJob(`${API_URL}/${job._id}`)}>Remove</button>
               </div>
             </div>
           )) : <h1>No job Available</h1>

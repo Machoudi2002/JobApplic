@@ -47,7 +47,7 @@ const useFetchApi = () => {
     const editJobDetails = async (URL: string, postData: object) => {
 
         try {
-            await axios.put(URL, postData);
+            await axios.patch(URL, postData);
             console.log(postData);
         } catch (error) {
             console.error('Error:', error);
@@ -57,7 +57,7 @@ const useFetchApi = () => {
     const deleteJob = async (URL: string) => {
         try {
             await axios.delete(URL);
-            console.log("Job deleted");
+            console.log("Job deleted successfully");
         } catch (error) {
             console.error("Error:", error)
         }
