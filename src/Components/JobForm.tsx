@@ -1,5 +1,8 @@
 import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
+import { jobInfo } from '../types';
+
+interface FormInput extends jobInfo {}
 
 interface JobFormProps {
   onSubmit: (data: object) => void;
@@ -7,7 +10,12 @@ interface JobFormProps {
 }
 
 const JobForm: React.FC<JobFormProps> = ({ onSubmit, defaultValues }) => {
-  const { register, handleSubmit, setValue, getValues } = useForm();
+  const { 
+    register, 
+    handleSubmit, 
+    setValue, 
+    getValues, 
+    formState: {errors} } = useForm<FormInput>();
 
   useEffect(() => {
     setValue('title', defaultValues.title);
@@ -38,15 +46,29 @@ const JobForm: React.FC<JobFormProps> = ({ onSubmit, defaultValues }) => {
         className="p-2 border rounded"
         type="text"
         placeholder="Job Title"
-        {...register('title', { required: true })}
+        {...register('title', { 
+          required: "title is required", 
+          minLength: {
+            value: 20,
+            message: "Job Title must be at least 20 characters"
+          }
+        })}
       />
+      {errors.title && <p>{errors.title.message}</p>}
       <textarea
         className="p-2 border rounded"
         placeholder="Job Description"
         cols={30}
         rows={10}
-        {...register('description', { required: true })}
+        {...register('description', { 
+          required: "Description is required",
+          minLength: {
+            value: 100,
+            message: "Job description must be at least 100 characters"
+          } 
+        })}
       ></textarea>
+      {errors.description && <p>{errors.description.message}</p>}
       <input
         className="p-3 border rounded shadow bg-textColor text-whiteBack cursor-pointer"
         type="submit"

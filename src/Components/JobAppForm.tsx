@@ -22,8 +22,8 @@ const JobAppForm: React.FC<Props> = ({ API_PUT_URL }) => {
     formState: { errors },
   } = useForm<FormInput>();
 
-  const onSubmit: SubmitHandler<FormInput> = (data) => {
-    postJobApp(API_PUT_URL, data);
+  const onSubmit: SubmitHandler<FormInput> = async (data) => {
+    await postJobApp(API_PUT_URL, data);
   };
 
   useEffect(() => {
@@ -50,7 +50,13 @@ const JobAppForm: React.FC<Props> = ({ API_PUT_URL }) => {
             className="p-2 border rounded"
             type="text"
             placeholder="FullName"
-            {...register("fullname", { required: "Full Name is required" })}
+            {...register("fullname", { 
+              required: "Full Name is required",
+              minLength: {
+                value: 8,
+                message: "Full Name must be at least 8 characters long"
+              } 
+            })}
           />
           {errors.fullname && <p>{errors.fullname.message}</p>}
   
@@ -58,7 +64,10 @@ const JobAppForm: React.FC<Props> = ({ API_PUT_URL }) => {
             className="p-2 border rounded"
             type="email"
             placeholder="Email"
-            {...register("email", { required: "Email is required" })}
+            {...register("email", { 
+              required: "Email is required",
+              validate: (email) => email.length > 0 && "Enter a valid email address"
+            })}
           />
           {errors.email && <p>{errors.email.message}</p>}
   
@@ -74,7 +83,10 @@ const JobAppForm: React.FC<Props> = ({ API_PUT_URL }) => {
             className="p-2 border rounded"
             type="url"
             placeholder="Linkedin Profile URL"
-            {...register("linkedinURL", { required: "LinkedIn URL is required" })}
+            {...register("linkedinURL", { 
+              required: "LinkedIn URL is required",
+              validate: (str) => !str.startsWith("https://www.linkedin.com/") ? "This is not a linkedin profile" : true
+            })}
           />
           {errors.linkedinURL && <p>{errors.linkedinURL.message}</p>}
   
@@ -91,7 +103,8 @@ const JobAppForm: React.FC<Props> = ({ API_PUT_URL }) => {
             placeholder="Years of Experience"
             {...register("experience", {
               required: "Years of Experience is required",
-              valueAsNumber: true, // convert the value to a number
+              valueAsNumber: true,
+              validate: (num) => num < 0 ? "Put a positive number" : true
             })}
           />
           {errors.experience && <p>{errors.experience.message}</p>}
