@@ -52,6 +52,10 @@ const JobForm: React.FC<JobFormProps> = ({ onSubmit, defaultValues }) => {
           minLength: {
             value: 20,
             message: "Job Title must be at least 20 characters"
+          },
+          maxLength: {
+            value: 40,
+            message: "Job Title must be at most 40 characters"
           }
         })}
       />
@@ -64,9 +68,14 @@ const JobForm: React.FC<JobFormProps> = ({ onSubmit, defaultValues }) => {
         {...register('description', { 
           required: "Description is required",
           minLength: {
-            value: 100,
+            value: 200,
             message: "Job description must be at least 100 characters"
-          } 
+          },
+          maxLength: {
+            value: 400,
+            message: "Job description must be less than 400 characters"
+          }
+          
         })}
       ></textarea>
       {errors.description && <ErrorMessage message={errors.description.message} />}

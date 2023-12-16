@@ -17,7 +17,7 @@ const ApplicationsPage = () => {
     <section className="container">
         <h1 className="font-extrabold italic text-5xl my-10 text-center"> Applications Page</h1>
         {
-            apiData ? apiData.map((app: jobApp, i: number) => (
+            apiData.length > 0 ? apiData.map((app: jobApp, i: number) => (
                 <div key={i}>
                     <ApplicationCard
                         fullname={app.fullname}
@@ -28,7 +28,7 @@ const ApplicationsPage = () => {
                         experience={app.experience}
                     />
                 </div>
-            )) : []
+            )) : <p className="font-bold text-center">No Applications Has been Submited To this job Offer</p>
         }
     </section>
   )
