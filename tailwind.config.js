@@ -9,7 +9,8 @@ export default {
       "backColor": "#FFF78A",
       "textColor": "#191919",
       "whiteBack": "#FFFBF5",
-      "gray": "#9ca3af"
+      "gray": "#9ca3af",
+      "error": "#DC2626"
     },
     fontFamily: {
       "mainFont": ["Lato"]

@@ -33,6 +33,15 @@ const useFetchApi = () => {
             console.error('Error:', error);
         }
     }
+    const getJobApps = async (URL: string) => {
+
+        try {
+            const response = await axios.get(URL);
+            setApiData(response.data.JobInfo.applications);
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
 
     const postJobApp = async (URL: string, postData: object) => {
 
@@ -64,7 +73,7 @@ const useFetchApi = () => {
     }
 
 
-    return { apiData, getJobs, getJobById, postJobApp, postNewJob, editJobDetails, deleteJob };
+    return { apiData, getJobs, getJobById, postJobApp, postNewJob, editJobDetails, deleteJob, getJobApps };
 }
 
 export default useFetchApi

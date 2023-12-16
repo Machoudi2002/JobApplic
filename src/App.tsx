@@ -7,6 +7,7 @@ import LoginPage from "./Pages/LoginPage"
 import useAuth from "./hooks/useAuth"
 import EditJobPage from "./Pages/EditJobPage"
 import AddNewJob from "./Pages/AddNewJob"
+import ApplicationsPage from "./Pages/ApplicationsPage"
 
 function App() {
   const { isAuth } = useAuth()
@@ -21,6 +22,7 @@ function App() {
               <Route path="/Admin" element={<AdminPage />} />
               <Route path="/Admin/edit/:jobId" element={<EditJobPage />} />
               <Route path="/Admin/new-job" element={<AddNewJob />} />
+              <Route path="/Admin/:jobId/applications" element={<ApplicationsPage />} />
             </>
           ) : (
             <Route path="/Login" element={<LoginPage />} />

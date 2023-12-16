@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { jobInfo } from '../types';
+import ErrorMessage from './ErrorMessage';
 
 interface FormInput extends jobInfo {}
 
@@ -47,14 +48,14 @@ const JobForm: React.FC<JobFormProps> = ({ onSubmit, defaultValues }) => {
         type="text"
         placeholder="Job Title"
         {...register('title', { 
-          required: "title is required", 
+          required: "Title is required", 
           minLength: {
             value: 20,
             message: "Job Title must be at least 20 characters"
           }
         })}
       />
-      {errors.title && <p>{errors.title.message}</p>}
+      {errors.title && <ErrorMessage message={errors.title.message} />}
       <textarea
         className="p-2 border rounded"
         placeholder="Job Description"
@@ -68,7 +69,7 @@ const JobForm: React.FC<JobFormProps> = ({ onSubmit, defaultValues }) => {
           } 
         })}
       ></textarea>
-      {errors.description && <p>{errors.description.message}</p>}
+      {errors.description && <ErrorMessage message={errors.description.message} />}
       <input
         className="p-3 border rounded shadow bg-textColor text-whiteBack cursor-pointer"
         type="submit"

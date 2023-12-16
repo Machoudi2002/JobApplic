@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { jobApp } from "../types";
 import useFetchApi from "../hooks/useFetchApi";
 import useSubmitMessage from "../hooks/useSubmitMessage";
+import ErrorMessage from "./ErrorMessage";
 
 interface FormInput extends jobApp {}
 
@@ -58,7 +59,7 @@ const JobAppForm: React.FC<Props> = ({ API_PUT_URL }) => {
               } 
             })}
           />
-          {errors.fullname && <p>{errors.fullname.message}</p>}
+          {errors.fullname && <ErrorMessage message={errors.fullname.message}/>}
   
           <input
             className="p-2 border rounded"
@@ -66,10 +67,10 @@ const JobAppForm: React.FC<Props> = ({ API_PUT_URL }) => {
             placeholder="Email"
             {...register("email", { 
               required: "Email is required",
-              validate: (email) => email.length > 0 && "Enter a valid email address"
+              validate: (email) => email.length > 0 || email.length < 6 && "Enter a valid email address"
             })}
           />
-          {errors.email && <p>{errors.email.message}</p>}
+          {errors.email && <ErrorMessage message={errors.email.message} />}
   
           <input
             className="p-2 border rounded"
@@ -77,7 +78,7 @@ const JobAppForm: React.FC<Props> = ({ API_PUT_URL }) => {
             placeholder="Phone Number"
             {...register("phoneNumber", { required: "Phone Number is required" })}
           />
-          {errors.phoneNumber && <p>{errors.phoneNumber.message}</p>}
+          {errors.phoneNumber && <ErrorMessage message={errors.phoneNumber.message} />}
   
           <input
             className="p-2 border rounded"
@@ -88,7 +89,7 @@ const JobAppForm: React.FC<Props> = ({ API_PUT_URL }) => {
               validate: (str) => !str.startsWith("https://www.linkedin.com/in/") ? "This is not a linkedin profile" : true
             })}
           />
-          {errors.linkedinURL && <p>{errors.linkedinURL.message}</p>}
+          {errors.linkedinURL && <ErrorMessage message={errors.linkedinURL.message} />}
   
           <input
             className="p-2 border rounded"
@@ -100,6 +101,7 @@ const JobAppForm: React.FC<Props> = ({ API_PUT_URL }) => {
           <input
             className="p-2 border rounded"
             type="number"
+            min={0}
             placeholder="Years of Experience"
             {...register("experience", {
               required: "Years of Experience is required",
@@ -107,7 +109,7 @@ const JobAppForm: React.FC<Props> = ({ API_PUT_URL }) => {
               validate: (num) => num < 0 ? "Put a positive number" : true
             })}
           />
-          {errors.experience && <p>{errors.experience.message}</p>}
+          {errors.experience && <ErrorMessage  message={errors.experience.message} />}
   
           <input
             className="p-3 border rounded shadow bg-textColor text-whiteBack cursor-pointer"
