@@ -19,6 +19,7 @@ export type JobObject = {
     title: string;
     description: string;
     date: string;
+    applications: [];
 }
 
 export type LoginData = {

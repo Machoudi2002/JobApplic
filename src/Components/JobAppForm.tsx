@@ -114,7 +114,7 @@ const JobAppForm: React.FC<Props> = ({ API_PUT_URL }) => {
           <input
             className="p-3 border rounded shadow bg-textColor text-whiteBack cursor-pointer"
             type="submit"
-            value="Submit"
+            value="Apply"
           />
         </form>
 

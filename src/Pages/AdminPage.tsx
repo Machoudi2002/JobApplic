@@ -3,6 +3,7 @@ import { useEffect } from "react"
 import { JobObject } from "../types"
 import { useNavigate } from "react-router-dom"
 import Counter from "../Components/Counter"
+import Chart from "../Components/Chart"
 
 const AdminPage = () => {
   let navigate = useNavigate();
@@ -13,14 +14,21 @@ const AdminPage = () => {
     getJobs(API_URL);
   }, [apiData])
 
-  const totalApplicationsLength = apiData?.reduce((total : number, job: any) => total + (job.applications?.length || 0), 0) || 0;
+  const totalApplications = apiData?.reduce((total : number, job: JobObject) => total + (job.applications?.length || 0), 0) || 0;
+  const dates = apiData?.filter((job: JobObject) => job.date).map((job: JobObject) => job.date?.slice(0, 2));
+  const xData = dates?.filter((value: string, index: number) => dates?.indexOf(value) === index);
+  const yData = dates?.reduce((count: { [key: string]: number }, item: string) => {
+    count[item] = (count[item] || 0) + 1;
+    return count;
+  }, {});
+
   return (
-    <section className="container text-center py-20">
-      <h1 className="font-extrabold italic text-5xl mb-10">Admin Page</h1>
+    <section className="container text-center py-3 sm:py-16 ">
       <div className="flex flex-col gap-1 sm:flex-row justify-between">
         <Counter total={apiData.length} kind="Jobs" />
-        <Counter total={totalApplicationsLength} kind="Apps" />
+        <Counter total={totalApplications} kind="Applications" />
       </div>
+      <Chart xData={xData} yData={Object.values(yData)} zData={[0, 5, 1]} />
       <button 
         className="font-bold bg-whiteBack w-full py-3 mb-2 rounded shadow"
         onClick={() => navigate("/Admin/new-job")}
