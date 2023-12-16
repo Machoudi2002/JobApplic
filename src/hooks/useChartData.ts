@@ -1,4 +1,4 @@
-
+import { JobObject } from "../types"
 
 const useChartData = () => {
 
@@ -12,6 +12,7 @@ const useChartData = () => {
                     backgroundColor: "black",
                     borderColor: "#DC2626",
                     tension: 0.5,
+                    pointHoverRadius: 7,
                 }, 
                 {
                     label: "Applications",
@@ -19,6 +20,7 @@ const useChartData = () => {
                     backgroundColor: "white",
                     borderColor: "#2563EB",
                     tension: 0.5,
+                    pointHoverRadius: 7,
                 }
             ]
         }
@@ -26,7 +28,30 @@ const useChartData = () => {
         return data
     }
 
-  return { getChartData };
+    const getDates = (apiData : []) => {
+        return apiData?.filter((job: JobObject) => job.date).map((job: JobObject) => job.date?.slice(0, 2));
+    }
+
+    const dateChartData = (dateArr: string[]) => {
+        return dateArr?.filter((value: string, index: number) => dateArr?.indexOf(value) === index);
+    }
+
+    const jobDataChart = (dataArr: string[]) => {
+        const yData = dataArr?.reduce((count: { [key: string]: number }, item: string) => {
+            count[item] = (count[item] || 0) + 1;
+            return count;
+          }, {});
+    
+        for (const key in yData) {
+            yData[key] = yData[key] - 1;
+            
+        }
+    
+        return Object.values(yData);
+    }
+
+
+  return { getChartData, dateChartData, getDates, jobDataChart };
 }
 
 export default useChartData

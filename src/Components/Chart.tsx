@@ -23,22 +23,37 @@ type chartData = {
 }
 
 const Chart = (props : chartData) => {
+    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul","Aug", "Sep", "Oct", "Nov", "Dec"];
+    const years = Array.from({ length: 30 }, (_, i) => (i + 2023))
     const { getChartData } = useChartData();
-    const options = {}
+    const options = {
+        animation: {
+            duration: 0,
+        },
+    };
   return (
     <div className="mb-2">
         <div className="p-3 bg-whiteBack flex flex-row justify-between align-center rounded shadow">
             <span className="text-left font-bold">Jobs Analytics ...</span>
             <div className="flex flex-row gap-3">
-                <select className="text-right font-bold bg-whiteBack">
-                    <option className="text-center font-bold" value="Dec">Oct</option>
-                    <option className="text-center font-bold" value="Dec">Nov</option>
-                    <option className="text-center font-bold" value="Dec">Dec</option>
+                <select className="text-right font-bold bg-whiteBack"
+                    onChange={event => console.log(event.target.value)}
+                >
+                    {
+                        months.map((month, i) => (
+                            <option className="text-center font-bold" value={month} key={i}>{month}</option>
+                        ))
+                    }
+
                 </select>
-                <select className="text-right font-bold bg-whiteBack">
-                    <option className="text-center font-bold" value="2023">2023</option>
-                    <option className="text-center font-bold" value="2024">2024</option>
-                    <option className="text-center font-bold" value="2025">2025</option>
+                <select className="text-right font-bold bg-whiteBack"
+                    onChange={event => console.log(event.target.value)}
+                >
+                    {
+                        years.map((year, i) => (
+                            <option className="text-center font-bold" value={year} key={i}>{year}</option>
+                        ))
+                    }
                 </select>
             </div>
         </div>
