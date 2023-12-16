@@ -3,22 +3,17 @@ import { useEffect } from "react"
 import { JobObject } from "../types"
 import { useNavigate } from "react-router-dom"
 import Counter from "../Components/Counter"
-import Chart from "../Components/Chart"
-import useChartData from "../hooks/useChartData"
 
 const AdminPage = () => {
   let navigate = useNavigate();
   const API_URL = `${import.meta.env.VITE_WEBSITE_DOMAIN}/jobs`;
   const { apiData, getJobs, deleteJob } = useFetchApi();
-  const { dateChartData, getDates, jobDataChart } = useChartData();
-  const days = Array.from({ length: 30 }, (_, i) => (i + 1).toString())
   
   useEffect(() => {
     getJobs(API_URL);
   }, [apiData])
 
   const totalApplications = apiData?.reduce((total : number, job: JobObject) => total + (job.applications?.length || 0), 0) || 0;
-  const daysData = getDates(apiData).concat(days);
 
   return (
     <section className="container text-center py-3 sm:py-16 ">
@@ -26,7 +21,6 @@ const AdminPage = () => {
         <Counter total={apiData.length} kind="Jobs" />
         <Counter total={totalApplications} kind="Applications" />
       </div>
-      <Chart xData={dateChartData(daysData)} yData={jobDataChart(daysData)} zData={[0, 5, 1]} />
       <button 
         className="font-bold bg-whiteBack w-full py-3 mb-2 rounded shadow"
         onClick={() => navigate("/Admin/new-job")}
