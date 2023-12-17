@@ -8,6 +8,7 @@ import useAuth from "./hooks/useAuth"
 import EditJobPage from "./Pages/EditJobPage"
 import AddNewJob from "./Pages/AddNewJob"
 import ApplicationsPage from "./Pages/ApplicationsPage"
+import Popup from "./Components/PopupMessage"
 
 function App() {
   const { isAuth } = useAuth()
@@ -16,6 +17,7 @@ function App() {
     <>
       <main className="h-screen bg-backColor text-textColor font-mainFont">
         <NavBar />
+        <Popup />
         <Routes>
           {isAuth ? (
             <>
