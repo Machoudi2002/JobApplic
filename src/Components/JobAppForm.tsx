@@ -5,6 +5,7 @@ import { jobApp } from "../types";
 import useFetchApi from "../hooks/useFetchApi";
 import useSubmitMessage from "../hooks/useSubmitMessage";
 import ErrorMessage from "./ErrorMessage";
+import SubmitMessageComp from "./SubmitMessageComp";
 
 interface FormInput extends jobApp {}
 
@@ -41,7 +42,9 @@ const JobAppForm: React.FC<Props> = ({ API_PUT_URL }) => {
   return (
     <section>
       {
-        submitStatus ? <h2 className="text-center font-extrabold italic text-5xl mt-16">{submitMessage}</h2> : (
+        submitStatus ? 
+            <SubmitMessageComp message={submitMessage} />
+             : (
 
           <form
           onSubmit={handleSubmit(onSubmit)}

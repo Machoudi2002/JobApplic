@@ -2,25 +2,35 @@ import useAuth from "../hooks/useAuth"
 import { useForm, SubmitHandler } from "react-hook-form"
 import { LoginData } from "../types";
 import ErrorMessage from "./ErrorMessage";
+import { useState } from "react";
 
 const AdminLoginForm = () => {
+    const [errorMessage, setErrorMessage] = useState<string | null>(null);
     const { login } = useAuth();
     const {
         register,
         handleSubmit,
-        formState: { errors, isSubmitSuccessful },
+        setValue,
+        formState: { errors },
       } = useForm<LoginData>();
 
-    
-    const onSubmit: SubmitHandler<LoginData> = (data) => {
-        login(data); 
-    };
+    const setDemoData = () => {
+        setValue("email", "123@123.com");
+        setValue("password", "123456789");
+    }
+    const onSubmit: SubmitHandler<LoginData> = async (data) => {
+        const errorMessage = await login(data);
+        if (errorMessage !== null && errorMessage !== undefined) {
+            console.error('Login error:', errorMessage);
+            setErrorMessage(errorMessage);
+          }
+      };
 
   return (
-    <div>
+    <div className="container bg-whiteBack px-8 py-5 mt-10 shadow rounded font-mainFont">
         <form 
             onSubmit={handleSubmit(onSubmit)}
-            className="container px-8 py-5 mt-10 bg-whiteBack shadow rounded font-mainFont flex flex-col gap-3"
+            className=" flex flex-col gap-3"
             >
             <input 
                 type="email"
@@ -37,7 +47,7 @@ const AdminLoginForm = () => {
             />
             {errors.password && <ErrorMessage message={errors.password.message}/>}
             {
-                isSubmitSuccessful && <ErrorMessage message="Invalid Email or Password" />
+                errorMessage && <ErrorMessage message={errorMessage} />
             }
             <input
                 type="submit"
@@ -45,6 +55,12 @@ const AdminLoginForm = () => {
                 value="Login"
             />
         </form>
+        <button 
+            className="w-full p-3 border rounded shadow bg-backColor text-textColor border-none mt-2 font-bold cursor-pointer"
+            onClick={setDemoData}
+        >
+            Demo Info
+        </button>
     </div>
   )
 }

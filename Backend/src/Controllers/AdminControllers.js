@@ -20,11 +20,13 @@ export const RegisterAdmin = async (req, res) => {
 export const LoginAdmin = async (req, res) => {
     try {
         let { email, password } = req.body;
+        // check if admin already exists
         const admin = await Admin.findOne({ email });
-        const passwordMatch = await bcrypt.compare(password, admin.password);
         if (!admin) {
-            return res.status(401).json({ error: 'Invalid email or password' });
+            return res.status(401).json({ error: 'User Not Found' });
         }
+        // check is password correct
+        const passwordMatch = await bcrypt.compare(password, admin.password);
         if (!passwordMatch) {
             return res.status(401).json({ error: 'Invalid email or password' });
         }

@@ -21,14 +21,14 @@ export const AuthProvider : React.FC<AuthProviderProps> = ({ children }) => {
       });
     let navigate = useNavigate()
 
-    const login = async (Data: LoginData) => {
+    const login = async (Data: LoginData): Promise<string | null> => {
         const API_URL = `${import.meta.env.VITE_WEBSITE_DOMAIN}/LoginAdmin`;
         try {
           await axios.post(API_URL, Data);
           setIsAuth(true);
           localStorage.setItem("isAuth", "true");
           navigate("/Admin");
-      
+          return null; // No error message if login is successful
         } catch (error) {
           if (
             axios.isAxiosError(error) &&
@@ -36,11 +36,14 @@ export const AuthProvider : React.FC<AuthProviderProps> = ({ children }) => {
             error.response.status === 401
           ) {
             console.error('Authentication failed:', error.response.data.error);
+            return error.response.data.error;
           } else {
             console.error('An unexpected error occurred:', error);
+            return "Unexpected error occurred, try again";
           }
         }
       };
+      
       
       
     
