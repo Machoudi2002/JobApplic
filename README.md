@@ -6,15 +6,15 @@
 
 🌟 Features :
 
-1️ - TypeScript Integration: JobApplic has leveled up with the power of TypeScript! Strong typing and enhanced code quality for a more robust and scalable codebase.
+1️ - **TypeScript Integration:** JobApplic has leveled up with the power of TypeScript! Strong typing and enhanced code quality for a more robust and scalable codebase.
 
-2 - Strict Form Validations: Say goodbye to errors! JobApplic now features stringent form validations, ensuring accuracy and completeness in every job application.
+2 - **Strict Form Validations:** Say goodbye to errors! JobApplic now features stringent form validations, ensuring accuracy and completeness in every job application.
 
-3️ - Job Management: Employer can now not only post new jobs but also edit existing ones, providing unprecedented control over job listings.
+3️ - **Job Management:** Employer can now not only post new jobs but also edit existing ones, providing unprecedented control over job listings.
 
-4️ - Application Tracking: Employer can now view and manage applications for each existing job, streamlining the hiring process.
+4️ - **Application Tracking:** Employer can now view and manage applications for each existing job, streamlining the hiring process.
 
-5️ - Admin Dashboard: JobApplic now offers a small analytics dashboard, tracking the total number of available jobs and applications. Real-time insights from the database.
+5️ - **Admin Dashboard:** JobApplic now offers a small analytics dashboard, tracking the total number of available jobs and applications. Real-time insights from the database.
 
 🛠️ Tech Stack Continues:
 
