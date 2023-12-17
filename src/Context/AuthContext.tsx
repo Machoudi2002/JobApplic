@@ -17,28 +17,32 @@ export const AuthContext = createContext<AuthContextProps | undefined>(undefined
 
 export const AuthProvider : React.FC<AuthProviderProps> = ({ children }) => {
     const [isAuth, setIsAuth] = useState(() => {
-        // Initialize isAuth based on the stored value in localStorage
         return localStorage.getItem("isAuth") === "true";
       });
     let navigate = useNavigate()
 
-    const login = async (Data : LoginData) => {
-        const API_URL = `${import.meta.env.VITE_WEBSITE_DOMAIN}/LoginAdmin`
+    const login = async (Data: LoginData) => {
+        const API_URL = `${import.meta.env.VITE_WEBSITE_DOMAIN}/LoginAdmin`;
         try {
-            await axios.post(API_URL, Data);
-            setIsAuth(true)
-            localStorage.setItem("isAuth", "true");
-            navigate("/Admin")
-
+          await axios.post(API_URL, Data);
+          setIsAuth(true);
+          localStorage.setItem("isAuth", "true");
+          navigate("/Admin");
+      
         } catch (error) {
-
-            if (axios.isAxiosError(error) && error.response) {
-                console.error('Login error:', error.response.data.error);
-            } else {
-                console.error('An unexpected error occurred:', error);
-            }
+          if (
+            axios.isAxiosError(error) &&
+            error.response &&
+            error.response.status === 401
+          ) {
+            console.error('Authentication failed:', error.response.data.error);
+          } else {
+            console.error('An unexpected error occurred:', error);
+          }
         }
       };
+      
+      
     
     const logout = () => {
         setIsAuth(false);

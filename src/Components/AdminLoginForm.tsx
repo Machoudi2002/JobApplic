@@ -1,18 +1,20 @@
 import useAuth from "../hooks/useAuth"
 import { useForm, SubmitHandler } from "react-hook-form"
 import { LoginData } from "../types";
+import ErrorMessage from "./ErrorMessage";
 
 const AdminLoginForm = () => {
     const { login } = useAuth();
     const {
         register,
         handleSubmit,
-        formState: { errors },
+        formState: { errors, isSubmitSuccessful },
       } = useForm<LoginData>();
+
     
-      const onSubmit: SubmitHandler<LoginData> = (data) => {
-        login(data)
-      };
+    const onSubmit: SubmitHandler<LoginData> = (data) => {
+        login(data); 
+    };
 
   return (
     <div>
@@ -24,22 +26,23 @@ const AdminLoginForm = () => {
                 type="email"
                 className="p-2 border rounded"
                 placeholder="Email Address"
-                value="123@123.com" 
-                {...register("email", { required: "email is required" })}
+                {...register("email", { required: "Email is required" })}
             />
-            {errors.email && <p>{errors.email.message}</p>}
+            {errors.email && <ErrorMessage message={errors.email.message}/>}
             <input 
                 type="password" 
                 className="p-2 border rounded"
                 placeholder="Password"
-                value="123456789"
-                {...register("password", { required: "password is required" })}
+                {...register("password", { required: "Password is required" })}
             />
-            {errors.password && <p>{errors.password.message}</p>}
-            <input 
+            {errors.password && <ErrorMessage message={errors.password.message}/>}
+            {
+                isSubmitSuccessful && <ErrorMessage message="Invalid Email or Password" />
+            }
+            <input
                 type="submit"
-                className="p-3 border rounded shadow bg-textColor text-whiteBack cursor-pointer" 
-                value="Login" 
+                className="p-3 border rounded shadow bg-textColor text-whiteBack cursor-pointer"
+                value="Login"
             />
         </form>
     </div>
