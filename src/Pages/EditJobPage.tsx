@@ -31,7 +31,11 @@ const EditJobPage: React.FC = () => {
         ? (
         <SubmitMessageComp message={submitMessage} /> 
         ) : 
-        <JobForm onSubmit={onSubmit} defaultValues={apiData} />
+        <JobForm 
+          action='Edit Job Details'
+          onSubmit={onSubmit} 
+          defaultValues={apiData} 
+        />
       }
       
     </div>

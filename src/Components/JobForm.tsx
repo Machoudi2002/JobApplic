@@ -8,9 +8,10 @@ interface FormInput extends jobInfo {}
 interface JobFormProps {
   onSubmit: (data: object) => void;
   defaultValues: { title: string; description: string };
+  action: string;
 }
 
-const JobForm: React.FC<JobFormProps> = ({ onSubmit, defaultValues }) => {
+const JobForm: React.FC<JobFormProps> = ({ onSubmit, defaultValues, action }) => {
   const { 
     register, 
     handleSubmit, 
@@ -82,7 +83,7 @@ const JobForm: React.FC<JobFormProps> = ({ onSubmit, defaultValues }) => {
       <input
         className="p-3 border rounded shadow bg-textColor text-whiteBack cursor-pointer"
         type="submit"
-        value="Edit Job Details"
+        value={action}
       />
     </form>
   );

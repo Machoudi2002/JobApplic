@@ -3,6 +3,7 @@ import React from 'react';
 import useFetchApi from '../hooks/useFetchApi';
 import useSubmitMessage from '../hooks/useSubmitMessage';
 import JobForm from '../Components/JobForm';
+import SubmitMessageComp from '../Components/SubmitMessageComp';
 
 const EditJobPage: React.FC = () => {
   const { postNewJob } = useFetchApi();
@@ -24,14 +25,16 @@ const EditJobPage: React.FC = () => {
       <h1 className='text-center font-extrabold italic text-5xl mt-16'>Post New Job</h1>
       {submitStatus 
         ? (
-          <h1 className='text-center font-extrabold italic text-5xl mt-16'>
-            {submitMessage}
-          </h1>
+          <SubmitMessageComp message={submitMessage} />
         ) :
-        <JobForm onSubmit={onSubmit} defaultValues={{
-          title: "",
-          description: "",
-        }} />
+        <JobForm 
+          action='Add New Job'
+          onSubmit={onSubmit} 
+          defaultValues={{
+            title: "",
+            description: "",
+          }} 
+        />
       }
     </div>
   );
