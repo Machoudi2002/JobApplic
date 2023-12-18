@@ -30,7 +30,7 @@ const AdminPage = () => {
       <div>
         {
           apiData ? apiData.map((job : JobObject, i: number) =>  (
-            <div className="font-bold bg-whiteBack w-full py-3 px-4 mb-2 rounded shadow flex flex-row justify-between" key={i}>
+            <div className="font-bold bg-whiteBack w-full py-3 px-4 mb-2 rounded shadow flex flex-row justify-between gap-4 sm:gap-0" key={i}>
               <h3 className="text-left cursor-pointer"
                 onClick={() => navigate(`/Admin/${job._id}/applications`)}
               >{job.title}</h3>
