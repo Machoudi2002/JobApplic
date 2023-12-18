@@ -4,14 +4,11 @@ const Popup = () => {
   const [showPopup, setShowPopup] = useState(false);
 
   useEffect(() => {
-    // Set showPopup to true after one second (1000 milliseconds)
     const timer = setTimeout(() => {
       setShowPopup(true);
-    }, 1000);
-
-    // Clear the timer to avoid memory leaks
+    }, 1100);
     return () => clearTimeout(timer);
-  }, []); // Empty dependency array means this effect runs only once on mount
+  }, []); 
 
   const togglePopup = () => {
     setShowPopup(!showPopup);
