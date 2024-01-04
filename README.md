@@ -1,7 +1,7 @@
 # JobApplic - Fullstack MERN Website
 🚀 Exciting Update on JobApplic! Now Powered by TypeScript and Packed with Enhanced Features! 🌐💼
 
-🙌 Check it out: [JobApplic](https://jobapplic.netlify.app/)
+🙌 Check out [Live website](https://jobapplic.netlify.app/)
 
 
 🌟 Features :
