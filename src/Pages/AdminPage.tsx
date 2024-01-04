@@ -1,5 +1,5 @@
 import useFetchApi from "../hooks/useFetchApi"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { JobObject } from "../types"
 import { useNavigate } from "react-router-dom"
 import Counter from "../Components/Counter"
@@ -8,18 +8,27 @@ const AdminPage = () => {
   let navigate = useNavigate();
   const API_URL = `${import.meta.env.VITE_WEBSITE_DOMAIN}/jobs`;
   const { apiData, getJobs, deleteJob } = useFetchApi();
+  const [totalApplications, setTotalApplications] = useState<number>(0);
+
+  const totalApps = apiData.reduce((total: number, job: JobObject) => total + (job.applications?.length || 0), 0)
+
+  const removeJob = (jobId : object) => {
+    deleteJob(`${API_URL}/${jobId}`)
+    setTotalApplications((prevTotal) => prevTotal - 1);
+  }
+
   
   useEffect(() => {
     getJobs(API_URL);
-  }, [apiData])
+    setTotalApplications(totalApps);
+  }, [totalApplications])
 
-  const totalApplications = apiData?.reduce((total : number, job: JobObject) => total + (job.applications?.length || 0), 0) || 0;
 
   return (
     <section className="container text-center py-3 sm:py-16 ">
       <div className="flex flex-col gap-1 sm:flex-row justify-between">
         <Counter total={apiData.length} kind="Jobs" />
-        <Counter total={totalApplications} kind="Applications" />
+        <Counter total={totalApps} kind="Applications" />
       </div>
       <button 
         className="font-bold bg-whiteBack w-full py-3 mb-2 rounded shadow"
@@ -41,7 +50,7 @@ const AdminPage = () => {
                 >
                   Edit
                 </button>
-                <button onClick={() => deleteJob(`${API_URL}/${job._id}`)}>Remove</button>
+                <button onClick={() => removeJob(job._id)}>Remove</button>
               </div>
             </div>
           )) : <h1>No job Available</h1>
